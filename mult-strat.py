@@ -5,6 +5,8 @@ import time
 from datetime import datetime
 from dotenv import load_dotenv
 
+load_dotenv()
+
 # ===== CONFIG =====
 API_KEY = os.getenv("OANDA_API_KEY")
 ACCOUNT_ID = os.getenv("OANDA_ACCOUNT_ID")
