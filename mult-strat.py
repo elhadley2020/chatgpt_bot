@@ -55,6 +55,9 @@ strategy_perf = {name: [] for name in STRATEGY_WEIGHTS}
 MAX_HISTORY = 20
 
 # ===== UTILITIES =====
+def format_price(price, precision=5):
+    return f"{price:.{precision}f}"
+
 def fetch_candles(pair,count=500,granularity="M5"):
     url=f"{BASE_URL}/instruments/{pair}/candles"
     params={"count":count,"granularity":granularity,"price":"M"}
@@ -77,8 +80,8 @@ def get_account_equity():
 def place_order(pair,units,stop_loss=None,take_profit=None):
     url=f"{BASE_URL}/accounts/{ACCOUNT_ID}/orders"
     order={"order":{"instrument":pair,"units":str(units),"type":"MARKET","positionFill":"DEFAULT"}}
-    if stop_loss: order["order"]["stopLossOnFill"]={"price":str(stop_loss)}
-    if take_profit: order["order"]["takeProfitOnFill"]={"price":str(take_profit)}
+    if stop_loss: order["order"]["stopLossOnFill"]={"price":format_price(stop_loss)}
+    if take_profit: order["order"]["takeProfitOnFill"]={"price":format_price(take_profit)}
     r=requests.post(url,headers=HEADERS,json=order)
     r.raise_for_status()
     print(f"{datetime.now()} | Order: {pair} {units} units")
