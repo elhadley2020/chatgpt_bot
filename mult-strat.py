@@ -3,10 +3,11 @@ import pandas as pd
 import numpy as np
 import time
 from datetime import datetime
+from dotenv import load_dotenv
 
 # ===== CONFIG =====
-API_KEY = "YOUR_OANDA_API_KEY"
-ACCOUNT_ID = "YOUR_OANDA_ACCOUNT_ID"
+API_KEY = os.getenv("OANDA_API_KEY")
+ACCOUNT_ID = os.getenv("OANDA_ACCOUNT_ID")
 BASE_URL = "https://api-fxpractice.oanda.com/v3"
 HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
